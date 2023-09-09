@@ -1,13 +1,32 @@
-import React from 'react'
+import React,{useState} from 'react'
 import '../Styles.css'
+//import axios from 'axios'
 import {Carousel} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 const Home = () => {
-  let navigate=useNavigate();
-  const successful=()=>{
-    let path='/courses'
-    navigate(path)
-  }
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  const successful = () => {
+    if (email && password) {
+      let path = '/courses';
+      navigate(path);
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+    setIsButtonDisabled(!inputEmail || !password);
+  };
+
+  const handlePasswordChange = (e) => {
+    const inputPassword = e.target.value;
+    setPassword(inputPassword);
+    setIsButtonDisabled(!email || !inputPassword);
+  };
   return (
     <div className=''>
       <div className='backsty vh '>
@@ -15,7 +34,7 @@ const Home = () => {
         <div className='d-flex justify-content-center '>
           <Carousel className='caros'>
             <Carousel.Item className='car1 text-center'>
-              <h3>"Learniverse has set my career!"</h3>
+              <h3>"BiblioSculpt has set my career!"</h3>
               <p>--Ashwin Bekal--</p>
               <br></br><br></br>
             </Carousel.Item>
@@ -32,30 +51,30 @@ const Home = () => {
           </Carousel>
         </div>
         <div className='row container-fluid'>
-          <div className='container-fluid col-6'>
+          <div className='container-fluid col-lg-6'>
             <div className='justify-content-center px-5 pb-5'>
               <form className='justify-content-center form' required>
                 <h2 className='maintext'>Namaste, Login...</h2><br></br>
                 <div>
                   <label htmlFor='email' className='labels'><h5>Email: </h5></label>
-                  <input type='email' placeholder='Enter Email Address' className='form-control inputmade' name='Email' required />
+                  <input type='email' placeholder='Enter Email Address' value={email} onChange={handleEmailChange} className='form-control inputmade' name='Email' autoFocus='True' required />
                 </div><br></br>
                 <div>
                   <label htmlFor='password' className='labels'><h5>Password: </h5></label>
-                  <input type='password' placeholder='Enter Password' className='form-control inputmade' name='Password' required></input>
+                  <input type='password' placeholder='Enter Password' value={password} onChange={handlePasswordChange} className='form-control inputmade' name='Password' required></input>
                 </div><br></br>
                 <div>
                   <label htmlFor='checkbox' className='labels'> Remember Me:&ensp;</label>
                   <input type='checkbox' className='custom-control custom-checkbox'></input>
                 </div><br></br>
                 <div className='d-grid px-3'>
-                  <button className='btn btn-success' type='submit' onClick={successful}>Login</button>
+                  <button className='btn btn-success' type='submit' onClick={successful} disabled={isButtonDisabled}>Go to Library</button>
                 </div>
               </form><br></br>
             </div>
           </div>
-          <div className='container-fluid col-6 px-5 pt-5'>
-            <h2 className='intro1'>Welcome to, Learniverse!</h2><br></br>
+          <div className='container-fluid col-lg-6 px-5 pr-5 pt-5'>
+            <h2 className='intro1'>Welcome to, BiblioSculpt!</h2><br></br>
             <h3 className='intro2'>Your Education Universe... to greater heights!</h3><br></br>
             <div className='row'>
               <div className='col-4 rank'>
@@ -93,7 +112,7 @@ const Home = () => {
           </div>
         </div>
         <footer>
-        <h3 className='text-center text-secondary bg-dark foot'>Developed by Learniverse Team of Institutions PVT. LTD. </h3>
+        <h3 className='text-center text-secondary bg-dark foot'>Developed by BiblioSculpt Team of Institutions PVT. LTD. </h3>
         </footer>
       </div>
     </div>

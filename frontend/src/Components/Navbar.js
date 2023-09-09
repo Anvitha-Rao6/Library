@@ -13,7 +13,7 @@ const Navbar = () => {
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <Link class="nav-link stynav px-3" aria-current="page" to='/'><div className='col'>Home</div></Link>&ensp;&ensp;
-                <Link class="nav-link disabled stynav px-3" to='/courses'><div className='col'>Courses</div></Link>&ensp;&ensp;
+                {/* <Link class="nav-link stynav text-secondary px-3" to='/courses'><div className='col'>Courses</div></Link>&ensp;&ensp; */}
                 <Link class="nav-link stynav px-3" to='/aboutus'><div className='col'>About</div></Link>&ensp;&ensp;
                 <Link class="nav-link disabled stynav text-secondary px-3">Results</Link>&ensp;&ensp;
             </div>
