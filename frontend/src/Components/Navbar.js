@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
         <nav class="navbar navbar-expand bg-dark px-3">
         <div class="container-fluid">
-            <Link class="navbar-brand text-white stynav1" to='/'><img src='https://static.vecteezy.com/system/resources/previews/016/743/195/original/thunder-education-drop-shape-concept-logo-template-education-logo-with-graduation-cap-and-thunder-icon-free-vector.jpg' alt='' className='imgnav rounded-pill'></img>&ensp;&ensp;Learniverse</Link>&ensp;&ensp;
+            <Link class="navbar-brand text-white stynav1" to='/'><img src='https://static.vecteezy.com/system/resources/previews/016/743/195/original/thunder-education-drop-shape-concept-logo-template-education-logo-with-graduation-cap-and-thunder-icon-free-vector.jpg' alt='' className='imgnav rounded-pill'></img>&ensp;&ensp;BiblioSculpt</Link>&ensp;&ensp;
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>

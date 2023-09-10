@@ -1,56 +1,77 @@
 import React, { useState } from 'react';
-import '../Styles.css';
 import axios from 'axios';
+import '../Styles.css';
 
 const Courses = () => {
-  const [bookName, setBookName] = useState('');
-  const [serverResponse, setServerResponse] = useState('');
+  const [formData, setFormData] = useState({ Book_Name: '', Author_Name: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axios.post('/add-book', { title: bookName });
-      console.log("Server Response Data: ", response.data);
-      setServerResponse(response.data.message);
-      alert(`A book named: ${bookName} is saved successfully!`);
-      setBookName(''); // Clear the input field after successful submission
+      const response = await axios.post('http://localhost:5000/addBook', formData);
+      console.log('Book saved:', response.data);
+      // Reset the form fields
+      alert(`${response.data.Book_Name} written by ${response.data.Author_Name} saved in the Library!`);
+      setFormData({ Book_Name: '', Author_Name: '' });
     } catch (error) {
-      console.error("Axios Error: ", error);
-      setServerResponse('An Error occurred while saving the Book!');
+      console.error('Error saving book:', error);
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
-    <div className='bg-dark vh'><br></br>
-      <div className='row'>
-        <div className='col mx-5'>
-          <form className='px-5' onSubmit={handleSubmit}>
-            <div className='row'>
-              <label htmlFor='email' className='labels'><h5>Enter the name of the Book: </h5></label>
-              <div className='col'>
+    <div className="bg-dark vh">
+      <br />
+      <div className="row">
+        <div className="col mx-5">
+          <form className="px-5" onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col">
+                <label htmlFor="name" className="labels">
+                  <h5>Enter the Name of the Book: </h5>
+                </label>
                 <input
                   style={{ width: '400px' }}
-                  placeholder='Your Book Here...'
-                  className='form-control inputmade'
-                  name='bookName'
-                  value={bookName}
-                  onChange={(e) => setBookName(e.target.value)}
+                  placeholder="Your Book Here..."
+                  className="form-control inputmade"
+                  name="Book_Name"
+                  value={formData.Book_Name}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
-              <div className='col'>
-                <button className='btn btn-success' style={{ width: "100px" }} type='submit'>Add</button>
+              <div className="col">
+                <label htmlFor="author" className="labels">
+                  <h5>Enter the Author of the Book: </h5>
+                </label>
+                <input
+                  style={{ width: '400px' }}
+                  placeholder="Author Here..."
+                  className="form-control inputmade"
+                  name="Author_Name"
+                  value={formData.Author_Name}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
+              <button
+                className="btn btn-success my-4 mx-5"
+                style={{ width: '100px', height: '50px' }}
+                type="submit"
+              >
+                Add
+              </button>
             </div>
           </form>
-          {serverResponse && (
-            <div className='px-5'><br></br>
-              <h5><p style={{ color: '#ff0000' }}>{serverResponse}</p></h5>
-            </div>
-          )}
         </div>
       </div>
-      
+
+
       <h2 className='px-4 jamaica'>Books we offer...for "Skill Development"</h2>
       <div className="row row-cols-1 row-cols-md-3 g-4 p-4">
         <div className="col">
@@ -132,7 +153,6 @@ const Courses = () => {
       </footer>
     </div>
   );
+};
 
-  
-}
 export default Courses;

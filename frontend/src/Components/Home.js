@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import '../Styles.css'
-//import axios from 'axios'
 import {Carousel} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 const Home = () => {
